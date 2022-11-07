@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 //import 'package:youthopia_2022_app/screens/loading_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:youthopia_admin/screens/category_screen.dart';
 //import 'package:youthopia_2022_app/services/supabase.dart';
 
 Future<void> main() async {
@@ -12,8 +13,8 @@ Future<void> main() async {
   await dotenv.load(fileName: ".env");
   await Supabase.initialize(
       url: dotenv.env['SUPABASE_URL']!, anonKey: dotenv.env['SUPABASE_KEY']!);
-  Supa supa = Supa();
-  await supa.getAboutDetails();
+
+  //await supa.getAboutDetails();
   runApp(
       //! Uncomment to enable Device Preview
 /*       DevicePreview(
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
           debugShowCheckedModeBanner: false,
-          home: const LoadingScreen(),
+          home: const CategoryScreen(),
         );
       },
     );
