@@ -1,6 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:youthopia_admin/services/events.dart';
+import 'package:youthopia_admin/services/participant.dart';
 
 final supabase = Supabase.instance.client;
 
@@ -32,7 +33,7 @@ class Supa{
         result['event_isTeam'],
         result['event_min_members'],
         result['event_max_members'],
-        '$eventPosterUrl.png');
+        '$eventPosterUrl.webp');
   }
 
   Future<void> getEventData() async {
@@ -76,4 +77,51 @@ class Supa{
     debugPrint(Event.artsEvents!.length.toString());
   }
 
+  static Future<List> getParticipants(String eventId) async {
+
+    final data = await supabase
+        .from('events')
+        .select('registered_participant')
+        .match({'event_id': eventId});
+    debugPrint(data[0]['registered_participant'].toString());
+    return data[0]['registered_participant'];
+  }
+
+  Future<List> getParticipantList(String eventId) async{
+    final List orderIdList = await getParticipants(eventId);
+    final List participants = [];
+    for (int i = 0; i < orderIdList!.length; i++) {
+      debugPrint(orderIdList![i]);
+      final data = await supabase
+          .from('registrations')
+          .select()
+          .eq('order_id', orderIdList[i]);
+
+      Participant part = toParticipant(data[0], orderIdList[i]);
+      participants.add(part);
+      debugPrint(data.toString());
+    }
+    return participants;
+  }
+
+  Participant toParticipant(result, String OrderId) {
+
+    bool isDit = (result['participant_identity'].length == 10) ? true : false;
+
+    String image = (!isDit)? supabase.storage
+        .from('participant-identity-proof')
+        .getPublicUrl(OrderId) : "";
+
+    debugPrint(result['team_name'].toString());
+    return Participant(
+        result['participant_name'],
+        result['participant_phone'],
+        result['participant_identity'],
+        result['participant_email'],
+        result['team_name'].toString(),
+        result['team_members_name'].toString(),
+        isDit,
+        image
+    );
+  }
 }

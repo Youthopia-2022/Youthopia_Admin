@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-//import 'package:youthopia_2022_app/constants/color_theme.dart';
-//import 'package:youthopia_2022_app/screens/loading_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_admin/screens/category_screen.dart';
 import 'package:youthopia_admin/services/supabase.dart';

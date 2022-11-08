@@ -35,23 +35,23 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
               physics: const ScrollPhysics(),
               shrinkWrap: true,
               crossAxisCount: 2,
-              childAspectRatio: 0.57,
+              childAspectRatio: 0.5,
               children: List.generate(totalItems, (index) {
-                return Container(
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF101010),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  padding: const EdgeInsets.all(5),
-                  margin: const EdgeInsets.all(10),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (context) =>
-                                  Home(widget.events[index])));
-                    },
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) =>
+                                Home(widget.events[index])));
+                  },
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF101010),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    padding: const EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(10),
                     child: Column(
                       children: [
                         Image(
