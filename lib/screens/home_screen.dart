@@ -1,6 +1,6 @@
 import 'package:youthopia_admin/services/events.dart';
 import 'package:flutter/material.dart';
-
+import 'package:photo_view/photo_view.dart';
 import '../services/supabase.dart';
 
 class Home extends StatefulWidget {
@@ -48,11 +48,12 @@ class _HomeState extends State<Home> {
       ),
       body: (!isLoaded)? const Center(
         child: CircularProgressIndicator(),
+      ) : (eventParticipants.isEmpty) ? const Center(
+        child: Text('No Registrations'),
       ) :
           ListView.builder(
             itemCount: eventParticipants.length,
               itemBuilder: (BuildContext context, int index) {
-              debugPrint(eventParticipants[index].imageUrl);
               return Container(
                 margin: const EdgeInsets.symmetric(vertical: 5),
                 padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -63,8 +64,10 @@ class _HomeState extends State<Home> {
                       children: [
                         const Text('Name : ',
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                        Text(eventParticipants[index].participantName,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),)
+                        Flexible(
+                          child: Text(eventParticipants[index].participantName,
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),),
+                        )
                       ],
                     ),
                     const SizedBox(
@@ -74,8 +77,8 @@ class _HomeState extends State<Home> {
                       children: [
                         const Text('Identity : ',
                           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                        Text(eventParticipants[index].participantIdentity,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),)
+                        Flexible(child: Text(eventParticipants[index].participantIdentity,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),))
                       ],
                     ),
                     const SizedBox(
@@ -85,8 +88,8 @@ class _HomeState extends State<Home> {
                       children: [
                         const Text('Email : ',
                           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                        Text(eventParticipants[index].participantEmail,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),)
+                        Flexible(child: Text(eventParticipants[index].participantEmail,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),))
                       ],
                     ),
                     const SizedBox(
@@ -96,8 +99,8 @@ class _HomeState extends State<Home> {
                       children: [
                         const Text('Phone : ',
                           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                        Text(eventParticipants[index].participantPhone,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),)
+                        Flexible(child: Text(eventParticipants[index].participantPhone,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),))
                       ],
                     ),
                     const SizedBox(
@@ -133,11 +136,14 @@ class _HomeState extends State<Home> {
                       height: 10,
                     ),
                     (eventParticipants[index].isDIt) ? const SizedBox(height: 0,) :
-                        Image(image: NetworkImage(
-                            '${eventParticipants[index].imageUrl}.png'
-                        ),
-                        height: 300,
-                        width: MediaQuery.of(context).size.width,)
+                        SizedBox(
+                          height: 300,
+                          width: MediaQuery.of(context).size.width,
+                          child: PhotoView(imageProvider: NetworkImage(
+                              '${eventParticipants[index].imageUrl}.png'
+                          ),
+                          ),
+                        )
                   ],
                 ),
               );

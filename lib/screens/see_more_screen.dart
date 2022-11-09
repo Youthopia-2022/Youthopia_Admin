@@ -138,6 +138,26 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                             ),
                           ],
                         ),
+                        const SizedBox(height: 5,),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.play_arrow,
+                              size: 20,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Flexible(
+                              child: Text(
+                                widget.events[index].eventId,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
