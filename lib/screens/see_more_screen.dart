@@ -31,6 +31,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
       body: ListView.builder(
           itemCount: 1,
           itemBuilder: (BuildContext context, int index) {
+            debugPrint("Inside Builder");
             return GridView.count(
               physics: const ScrollPhysics(),
               shrinkWrap: true,
@@ -86,9 +87,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                               width: 10,
                             ),
                             Text(
-                              widget.events[index].eventTime
-                                  .toString()
-                                  .substring(10, 15),
+                              widget.events[index].eventTime,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 15),
                             ),
@@ -107,10 +106,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                             const SizedBox(
                               width: 10,
                             ),
-                            Text(
-                              DateFormat('dd-MM-yyyy')
-                                  .format(widget.events[index].eventDate)
-                                  .toString(),
+                            Text( widget.events[index].eventDate,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 15),
                             ),

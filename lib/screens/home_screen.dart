@@ -112,8 +112,10 @@ class _HomeState extends State<Home> {
                           children: [
                             const Text('Team Name : ',
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                            Text(eventParticipants[index].teamName,
-                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),)
+                            Flexible(
+                              child: Text(eventParticipants[index].teamName,
+                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),),
+                            )
                           ],
                         ),
                         const SizedBox(
@@ -123,8 +125,8 @@ class _HomeState extends State<Home> {
                           children: [
                             const Text('Team Members : ',
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                            Text(eventParticipants[index].teamMembers,
-                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),)
+                            Flexible(child: Text(eventParticipants[index].teamMembers,
+                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),))
                           ],
                         ),
                         const SizedBox(
